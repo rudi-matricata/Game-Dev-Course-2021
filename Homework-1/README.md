@@ -7,7 +7,7 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
  3. C# Basics
  4. Physics
 
-#Your tasks for it are:
+# Your tasks for it are:
  1. Setup a scene - make a level with the assets that are given.
  2. Make a player character and give him the ability to move
  3. Make a camera follow script - The task is to write a script that will make the camera follow the player. Bonus points if you can make the following motion smooth.
@@ -17,9 +17,9 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
  7*. Pick Ups - In the asset package there is a key. Use this key and when the player move through it it will disappear. Output something in the console.
  8*. Power Ups - Make a jumping pad or something similar.
  
-#After you finish this homework your game may look something like:
+# After you finish this homework your game may look something like:
 ![image](https://user-images.githubusercontent.com/25185815/108394913-ebc36000-721d-11eb-9f92-79e3bd036c1a.png)
 ![Doodly Pickup](https://user-images.githubusercontent.com/25185815/108393551-70ad7a00-721c-11eb-9adf-644727a2c7e6.JPG)
 
-#Notes:
+# Notes:
 The Asset Package is Bolt 2D
