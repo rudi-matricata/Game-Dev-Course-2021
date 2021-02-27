@@ -19,7 +19,6 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
  
 # After you finish this homework your game may look something like:
 ![image](https://user-images.githubusercontent.com/25185815/108394913-ebc36000-721d-11eb-9f92-79e3bd036c1a.png)
-![Doodly Pickup](https://user-images.githubusercontent.com/25185815/108393551-70ad7a00-721c-11eb-9adf-644727a2c7e6.JPG)
 
 # Notes:
 The Asset Package is Bolt 2D
