@@ -4,4 +4,4 @@ Here are all the tasks for the homework of the course. Also in this repository I
  
 | Task | Due Date |
 |:----:|:--------:|
-| Homework - 1 | 19.03 |
+| Homework-1 | 19.03.2021 |
