@@ -21,4 +21,4 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
 ![image](https://user-images.githubusercontent.com/25185815/108394913-ebc36000-721d-11eb-9f92-79e3bd036c1a.png)
 
 # Notes:
-The Asset Package is Bolt 2D
+The Asset Package is Bolt 2D, but if you want to use something else you can.
