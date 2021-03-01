@@ -19,6 +19,7 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
  6. Moving Platforms - Right or left. Up or down. As you wish.
  ![hw1_moving_platforms](https://user-images.githubusercontent.com/20006641/109520380-d91a1800-7ab4-11eb-9ceb-9422c9df0667.gif)
  7. ** Pick Ups - In the asset package there is a key. Use this key and when the player move through it it will disappear. Output something in the console.
+ 
  ![hw1_pickups](https://user-images.githubusercontent.com/20006641/109517387-dff35b80-7ab1-11eb-82f2-308257f87bb6.gif)
  8. ** Power Ups - Make a jumping pad or something similar.
  9. Return player to starting position when falls out of map.
