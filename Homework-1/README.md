@@ -38,3 +38,4 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
 
 # Notes:
 The Asset Package is Bolt 2D, but if you want to use something else you can.
+You can get spring sprites and additional assets from (here)[https://opengameart.org/content/jumper-pack]
