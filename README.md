@@ -4,4 +4,4 @@ Here are all the tasks for the homework of the course. Also in this repository I
  
 | Task | Due Date |
 |:----:|:--------:|
-| Homework-1 | 19.03.2021 |
+| [Homework-1](https://github.com/StefanRRachkov/Game-Dev-Course-2021/tree/main/Homework-1) | 19.03.2021 |
