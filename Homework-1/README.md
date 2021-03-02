@@ -31,7 +31,9 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
  ![hw1_pickups](https://user-images.githubusercontent.com/20006641/109517387-dff35b80-7ab1-11eb-82f2-308257f87bb6.gif)
  
  8. ** Power Ups - Make a jumping pad or something similar.
+ 
  ![hw1_jumping_spring](https://user-images.githubusercontent.com/20006641/109576197-0342f880-7afc-11eb-96ca-2f451dd48909.gif)
+
  10. Return player to starting position when falls out of map.
 
 # After you finish this homework your game may look something like:
