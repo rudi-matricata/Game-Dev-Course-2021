@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Platform
+  - Key
+  - Trampoline
   layers:
   - Default
   - TransparentFX
@@ -13,9 +16,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Platform
+  - Key
+  - Hero
   - 
   - 
   - 
@@ -40,4 +43,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3453838669
+    locked: 0
+  - name: Platform
+    uniqueID: 2522023789
+    locked: 0
+  - name: Key
+    uniqueID: 1278702617
+    locked: 0
+  - name: Trampoline
+    uniqueID: 237449571
+    locked: 0
+  - name: Hero
+    uniqueID: 1782411141
     locked: 0
