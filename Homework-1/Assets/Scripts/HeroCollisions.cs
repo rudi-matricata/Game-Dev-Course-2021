@@ -7,12 +7,16 @@ public class HeroCollisions : MonoBehaviour
     public delegate void GroundHit(bool grounded);
     public static event GroundHit OnGroundHit;
 
+    public delegate void EnemyHit();
+    public static event EnemyHit OnEnemyHit;
+
     public delegate void ObtainKey();
     public static event ObtainKey OnKeyObtained;
 
     private const string platformTag = "Platform";
     private const string trampolineTag = "Trampoline";
     private const string keyTag = "Key";
+    private const string enemyTag = "Enemy";
 
     [SerializeField]
     private int trampolineForceFactor;
@@ -46,6 +50,10 @@ public class HeroCollisions : MonoBehaviour
             OnKeyObtained?.Invoke();
             Destroy(collision.gameObject);
         }
+        if(collisionObject.CompareTag(enemyTag)) {
+            OnEnemyHit?.Invoke();
+        }
+
         SetGrounded(collision, true);
     }
 

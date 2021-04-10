@@ -8,13 +8,16 @@ public class HeroStats : MonoBehaviour
     private const string fullKeySpriteName = "HudKeyFull";
 
     private int obtainedKeysCount;
+    private int heartsCount;
 
     private readonly SpriteRenderer[] keys = new SpriteRenderer[3];
+    private readonly Stack<GameObject> hearts = new Stack<GameObject>();
 
     private void Start() {
         obtainedKeysCount = 0;
 
         HeroCollisions.OnKeyObtained += IncreaseObtainedKeys;
+        HeroCollisions.OnEnemyHit += LoseHeart;
 
         foreach (Transform child in transform) {
             if (child.CompareTag(heroKeysTag)) {
@@ -22,7 +25,13 @@ public class HeroStats : MonoBehaviour
                 foreach(Transform keyTransform in child.transform) {
                     keys[i++] = keyTransform.GetComponent<SpriteRenderer>();
                 }
+            } else if(child.CompareTag("HeroHearts")) {
+                foreach (Transform heartTransform in child.transform) {
+                    hearts.Push(heartTransform.gameObject);
+                }
+                heartsCount = hearts.Count;
             }
+
         }
     }
 
@@ -33,5 +42,10 @@ public class HeroStats : MonoBehaviour
         keys[obtainedKeysCount++].sprite = Resources.Load<Sprite>(fullKeySpriteName);
 
         Debug.Log("Obtained keys: " + obtainedKeysCount);
+    }
+
+    private void LoseHeart() {
+        heartsCount--;
+        Destroy(hearts.Pop());
     }
 }
