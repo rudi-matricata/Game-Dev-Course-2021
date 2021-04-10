@@ -9,7 +9,7 @@ public class HeroStats : MonoBehaviour
     private void Start() {
         obtainedKeysCount = 0;
 
-        Hero.OnKeyObtained += IncreaseObtainedKeys;
+        HeroCollisions.OnKeyObtained += IncreaseObtainedKeys;
     }
 
     private void IncreaseObtainedKeys() {
