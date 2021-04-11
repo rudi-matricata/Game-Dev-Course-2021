@@ -12,9 +12,11 @@ public class HeroStats : MonoBehaviour
 
     private readonly SpriteRenderer[] keys = new SpriteRenderer[3];
     private readonly Stack<GameObject> hearts = new Stack<GameObject>();
+    private Sprite fullKeySprite;
 
     private void Start() {
         obtainedKeysCount = 0;
+        fullKeySprite = Resources.Load<Sprite>(fullKeySpriteName);
 
         HeroCollisions.OnKeyObtained += IncreaseObtainedKeys;
         HeroCollisions.OnEnemyHit += LoseHeart;
@@ -37,13 +39,13 @@ public class HeroStats : MonoBehaviour
         if(obtainedKeysCount >= 3) {
             return;
         }
-        keys[obtainedKeysCount++].sprite = Resources.Load<Sprite>(fullKeySpriteName);
+        keys[obtainedKeysCount++].sprite = fullKeySprite;
 
         Debug.Log("Obtained keys: " + obtainedKeysCount);
     }
 
     private void LoseHeart() {
-        if (hearts.Count >= 0) {
+        if (hearts.Count > 0) {
             Destroy(hearts.Pop());
         } else {
             Debug.Log("No more hearts");
