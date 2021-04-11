@@ -59,6 +59,11 @@ public class HeroMovement : MonoBehaviour
         ConfigureAnimation();
     }
 
+    private void OnDestroy() {
+        HeroCollisions.OnEnemyHit -= ShowHurt;
+        HeroCollisions.OnGroundHit -= SetGrounded;
+    }
+
     private void ConfigureAnimation() {
         animator.SetBool(groundedAnimCondition, isGrounded);
         if (lastPosition == transform.position) {

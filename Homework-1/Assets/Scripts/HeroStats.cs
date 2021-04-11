@@ -35,6 +35,11 @@ public class HeroStats : MonoBehaviour
         }
     }
 
+    private void OnDestroy() {
+        HeroCollisions.OnEnemyHit -= LoseHeart;
+        HeroCollisions.OnKeyObtained -= IncreaseObtainedKeys;
+    }
+
     private void IncreaseObtainedKeys() {
         if(obtainedKeysCount >= 3) {
             return;
