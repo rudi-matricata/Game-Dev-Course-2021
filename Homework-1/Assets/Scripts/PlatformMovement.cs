@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformMovement : MonoBehaviour {
+public class PlatformMovement : MonoBehaviour, IHorizontallyMovable {
 
     private const int moveAmplitude = 2;
 
     [SerializeField]
     private int platformMoveSpeed = 3;
     
-    private double initialX;
+    private float initialX;
     private bool moveRight = true;
 
     private void Start() {
@@ -17,16 +17,10 @@ public class PlatformMovement : MonoBehaviour {
     }
 
     private void Update() {
-        if (transform.position.x - initialX > moveAmplitude) {
-            moveRight = false;
-        } else if (transform.position.x - initialX < -moveAmplitude) {
-            moveRight = true;
-        }
+        moveRight = MovementUtils.Move(ShouldMove(), moveRight,transform, initialX, moveAmplitude, platformMoveSpeed);
+    }
 
-        if (moveRight) {
-            transform.position = new Vector2(transform.position.x + (platformMoveSpeed * Time.deltaTime), transform.position.y);
-        } else {
-            transform.position = new Vector2(transform.position.x - (platformMoveSpeed * Time.deltaTime), transform.position.y);
-        }
+    public bool ShouldMove() {
+        return true;
     }
 }

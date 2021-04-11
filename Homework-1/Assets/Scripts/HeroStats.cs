@@ -5,10 +5,10 @@ using UnityEngine;
 public class HeroStats : MonoBehaviour
 {
     private const string heroKeysTag = "HeroKeys";
+    private const string heroHeartsTag = "HeroHearts";
     private const string fullKeySpriteName = "HudKeyFull";
 
     private int obtainedKeysCount;
-    private int heartsCount;
 
     private readonly SpriteRenderer[] keys = new SpriteRenderer[3];
     private readonly Stack<GameObject> hearts = new Stack<GameObject>();
@@ -25,13 +25,11 @@ public class HeroStats : MonoBehaviour
                 foreach(Transform keyTransform in child.transform) {
                     keys[i++] = keyTransform.GetComponent<SpriteRenderer>();
                 }
-            } else if(child.CompareTag("HeroHearts")) {
+            } else if(child.CompareTag(heroHeartsTag)) {
                 foreach (Transform heartTransform in child.transform) {
                     hearts.Push(heartTransform.gameObject);
                 }
-                heartsCount = hearts.Count;
             }
-
         }
     }
 
@@ -45,7 +43,10 @@ public class HeroStats : MonoBehaviour
     }
 
     private void LoseHeart() {
-        heartsCount--;
-        Destroy(hearts.Pop());
+        if (hearts.Count >= 0) {
+            Destroy(hearts.Pop());
+        } else {
+            Debug.Log("No more hearts");
+        }
     }
 }
