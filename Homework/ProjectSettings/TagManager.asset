@@ -7,9 +7,7 @@ TagManager:
   - Platform
   - Key
   - Trampoline
-  - HeroHearts
   - Heart
-  - HeroKeys
   - HeroKey
   - Enemy
   layers:
@@ -66,4 +64,7 @@ TagManager:
     locked: 0
   - name: HeroStats
     uniqueID: 744463901
+    locked: 0
+  - name: UI
+    uniqueID: 197678205
     locked: 0
