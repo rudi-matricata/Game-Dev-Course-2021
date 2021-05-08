@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroCollisions : MonoBehaviour
-{
+public class HeroCollisions : MonoBehaviour {
     public delegate void GroundHit(bool grounded);
     public static event GroundHit OnGroundHit;
 
@@ -24,7 +23,7 @@ public class HeroCollisions : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     private void Start() {
-        trampolineForceFactor = 13;
+        trampolineForceFactor = 7;
 
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
@@ -44,21 +43,42 @@ public class HeroCollisions : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject collisionObject = collision.gameObject;
         if (collisionObject.CompareTag(trampolineTag)) {
-            rigidBody.AddForce(Vector2.up * trampolineForceFactor, ForceMode2D.Impulse);
+            foreach (ContactPoint2D hitPos in collision.contacts) {
+                if (hitPos.normal.y > 0) {
+                    rigidBody.AddForce(Vector2.up * trampolineForceFactor, ForceMode2D.Impulse);
+                }
+            }
         }
         if (collisionObject.CompareTag(keyTag)) {
             OnKeyObtained?.Invoke();
             Destroy(collision.gameObject);
         }
-        if(collisionObject.CompareTag(enemyTag)) {
+        if (collisionObject.CompareTag(enemyTag)) {
             OnEnemyHit?.Invoke();
         }
+        if (collision.gameObject.CompareTag(platformTag)) {
+            SetGrounded(collision, true);
+        }
+    }
 
-        SetGrounded(collision, true);
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag(platformTag)) {
+            foreach (ContactPoint2D hitPos in collision.contacts) {
+                if (hitPos.normal.x != 0) {
+                    SetGrounded(collision, false);
+                } else if (hitPos.normal.y > 0) {
+                    SetGrounded(collision, true);
+                } else {
+                    SetGrounded(collision, false);
+                }
+            }
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
-        SetGrounded(collision, false);
+        if (collision.gameObject.CompareTag(platformTag)) {
+            SetGrounded(collision, false);
+        }
     }
 
     private void SetGrounded(Collision2D collision, bool grounded) {
