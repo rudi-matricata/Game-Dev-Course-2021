@@ -10,7 +10,7 @@ public class HeroRespawn : MonoBehaviour
     private Vector2 respawnVector;
     private Rigidbody2D rigidBody;
 
-    void Start()
+    private void Start()
     {
         minYLimitBeforeRespawn = -20;
         respawnVector = new Vector2(transform.position.x, transform.position.y);

@@ -8,7 +8,7 @@ public class HealthBar : MonoBehaviour {
 
     private readonly Stack<GameObject> hearts = new Stack<GameObject>();
 
-    void Start() {
+    private void Start() {
         foreach (Transform child in transform) {
             if (child.CompareTag(heartTag)) {
                 hearts.Push(child.gameObject);
