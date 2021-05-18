@@ -14,8 +14,11 @@ public class HeroMovement : MonoBehaviour
     private int moveSpeed;
 
     private bool isGrounded;
+    private bool faceRight;
 
+    [SerializeField]
     private Rigidbody2D rigidBody;
+    [SerializeField]
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
@@ -25,11 +28,9 @@ public class HeroMovement : MonoBehaviour
         forceFactor = 10;
         moveSpeed = 3;
         isGrounded = false;
+        faceRight = true;
 
-        rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         animator = GetComponent<Animator>();
 
@@ -42,12 +43,16 @@ public class HeroMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A)) {
             transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
-            spriteRenderer.flipX = true;
+            if(faceRight) {
+                Flip();
+            }
             animator.SetBool(xCoordAlteredAnimCondition, true);
         }
         if (Input.GetKey(KeyCode.D)) {
             transform.position = new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
-            spriteRenderer.flipX = false;
+            if (!faceRight) {
+                Flip();
+            }
             animator.SetBool(xCoordAlteredAnimCondition, true);
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -77,5 +82,10 @@ public class HeroMovement : MonoBehaviour
 
     private void SetGrounded(bool grounded) {
         isGrounded = grounded;
+    }
+
+    private void Flip() {
+        faceRight = !faceRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 }

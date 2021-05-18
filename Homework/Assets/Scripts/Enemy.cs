@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour, IHorizontallyMovable {
     private float initialX;
     private bool moveRight = true;
 
+    [SerializeField]
+    private int health = 3;
+
     private GameObject player;
 
     private Rigidbody2D rigidBody;
@@ -33,5 +36,11 @@ public class Enemy : MonoBehaviour, IHorizontallyMovable {
 
     public bool ShouldMove() {
         return Vector2.Distance(player.transform.position, gameObject.transform.position) < 8f;
+    }
+
+    public void GetHit() {
+        if(--health == 0) {
+            Destroy(gameObject);
+        }
     }
 }
