@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HeroMovement : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class HeroMovement : MonoBehaviour
 
     Vector3 lastPosition;
 
+    float moveByX = 0;
+
     private void Start() {
         forceFactor = 10;
         moveSpeed = 3;
@@ -41,27 +44,32 @@ public class HeroMovement : MonoBehaviour
     private void Update() {
         lastPosition = transform.position;
 
-        if (Input.GetKey(KeyCode.A)) {
-            transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
-            if(faceRight) {
+        if (moveByX < 0) {
+            if (faceRight) {
                 Flip();
             }
             animator.SetBool(xCoordAlteredAnimCondition, true);
         }
-        if (Input.GetKey(KeyCode.D)) {
-            transform.position = new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
+        if (moveByX > 0) {
             if (!faceRight) {
                 Flip();
             }
             animator.SetBool(xCoordAlteredAnimCondition, true);
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (isGrounded) {
-                rigidBody.AddForce(Vector2.up * forceFactor, ForceMode2D.Impulse);
-                isGrounded = false;
-            }
-        }
+        rigidBody.velocity = new Vector2(moveByX, rigidBody.velocity.y);
         ConfigureAnimation();
+    }
+
+    public void OnJump() {
+        if (isGrounded) {
+            rigidBody.AddForce(Vector2.up * forceFactor, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
+    }
+
+    public void OnMove(InputValue input) {
+        Vector2 inputVec = input.Get<Vector2>();
+        moveByX = inputVec.x * moveSpeed;
     }
 
     private void OnDestroy() {

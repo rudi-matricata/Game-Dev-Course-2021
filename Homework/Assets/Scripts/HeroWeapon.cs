@@ -10,10 +10,8 @@ public class HeroWeapon : MonoBehaviour
     [SerializeField]
     private GameObject bullet;
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.M)) {
-            Fire();
-        }
+    public void OnShoot() {
+        Fire();
     }
 
     private void Fire() {
