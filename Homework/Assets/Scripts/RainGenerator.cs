@@ -18,7 +18,7 @@ public class RainGenerator : MonoBehaviour
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
-        ps.enableEmission= true;
+        ps.enableEmission= false;
 
         timeDuration = 0f;
         maxTimeInSeconds = 60f;
