@@ -42,3 +42,15 @@ This homework is based of the first 4 practices in https://www.youtube.com/chann
 # Notes:
 The Asset Package is Bolt 2D, but if you want to use something else you can.
 You can get spring sprites and additional assets from ![here](https://opengameart.org/content/jumper-pack)
+
+## Homework 2
+
+Tasks:
+ 1. Healthbar - Like in the picture with 3-4 hearts.
+ 2. UI for Pickups - When you pickup a key, to register it with the UI.
+ 3. Main Menu - Play, Exit, Options (doesn't need to have option button functionality).
+ 4. Shader - When you are on low health (1 heart) to set a red vignete shader or Screen shake with shader, ***NOT BY MANIPULATING THE CAMERA POSITION*** / Blur when you are hit or whatever you like.
+ 5. Animate Player States - Walk animation, Jump animation, Hurt animation and if you want some other animation.
+ 6. Simple AI for Enemy as seen in the first screenshot - Make the AI aggressive when the player is near.
+ 
+ ***For the task it's recommended to use your project from practice and not the one from this repository!***
