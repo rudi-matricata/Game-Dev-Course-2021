@@ -23,8 +23,6 @@ public class HeroMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    Vector3 lastPosition;
-
     float moveByX = 0;
 
     private void Start() {
@@ -42,20 +40,9 @@ public class HeroMovement : MonoBehaviour
     }
 
     private void Update() {
-        lastPosition = transform.position;
-
-        if (moveByX < 0) {
-            if (faceRight) {
-                Flip();
-            }
-            animator.SetBool(xCoordAlteredAnimCondition, true);
-        }
-        if (moveByX > 0) {
-            if (!faceRight) {
-                Flip();
-            }
-            animator.SetBool(xCoordAlteredAnimCondition, true);
-        }
+        if ((moveByX < 0 && faceRight) || (moveByX > 0 && !faceRight)) {
+            Flip();
+        } 
         rigidBody.velocity = new Vector2(moveByX, rigidBody.velocity.y);
         ConfigureAnimation();
     }
@@ -79,8 +66,11 @@ public class HeroMovement : MonoBehaviour
 
     private void ConfigureAnimation() {
         animator.SetBool(groundedAnimCondition, isGrounded);
-        if (lastPosition == transform.position) {
+
+        if(moveByX == 0) {
             animator.SetBool(xCoordAlteredAnimCondition, false);
+        } else {
+            animator.SetBool(xCoordAlteredAnimCondition, true);
         }
     }
 
