@@ -9,8 +9,7 @@ namespace Tests
     public class GameTests
     {
         [Test]
-        public void TestSimplePasses()
-        {
+        public void TestLoseHeartWhenHitByEnemy() {
             HealthBar healthBar = new HealthBar();
             HeroCollisions heroCollisions = new HeroCollisions();
 
@@ -20,19 +19,25 @@ namespace Tests
             }
 
             while(i > 0) {
-                Assert.AreEqual(i--, healthBar.Hearts.Count);
+                Assert.AreEqual(healthBar.Hearts.Count, i--);
                 heroCollisions.OnEnemy();
             }
         }
 
-        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // `yield return null;` to skip a frame.
-        [UnityTest]
-        public IEnumerator TestWithEnumeratorPasses()
-        {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
+        [Test]
+        public void TestJump() {
+            GameObject testObj = new GameObject("testGO");
+            testObj.AddComponent<Rigidbody2D>();
+            testObj.AddComponent<Animator>();
+            HeroMovement heroMovement = testObj.AddComponent(typeof(HeroMovement)) as HeroMovement;
+
+            Rigidbody2D rb2d = heroMovement.gameObject.GetComponent<Rigidbody2D>();
+            Assert.AreEqual(rb2d.velocity.y, 0);
+
+            heroMovement.Start();
+            heroMovement.OnJump();
+
+            Assert.Greater(rb2d.velocity.y, 0);
         }
     }
 }

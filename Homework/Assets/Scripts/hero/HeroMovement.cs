@@ -22,12 +22,13 @@ public class HeroMovement : MonoBehaviour
 
     float xCoordDelta = 0;
 
-    private void Start() {
+    public void Start() {
         forceFactor = 10;
         moveSpeed = 3;
-        isGrounded = false;
+        isGrounded = true;
         faceRight = true;
 
+        rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
 
         animator = GetComponent<Animator>();
