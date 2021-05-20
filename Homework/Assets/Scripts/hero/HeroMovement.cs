@@ -20,7 +20,7 @@ public class HeroMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    float moveByX = 0;
+    float xCoordDelta = 0;
 
     private void Start() {
         forceFactor = 10;
@@ -37,10 +37,10 @@ public class HeroMovement : MonoBehaviour
     }
 
     private void Update() {
-        if ((moveByX < 0 && faceRight) || (moveByX > 0 && !faceRight)) {
+        if ((xCoordDelta < 0 && faceRight) || (xCoordDelta > 0 && !faceRight)) {
             Flip();
         } 
-        rigidBody.velocity = new Vector2(moveByX, rigidBody.velocity.y);
+        rigidBody.velocity = new Vector2(xCoordDelta, rigidBody.velocity.y);
         ConfigureAnimation();
     }
 
@@ -53,7 +53,7 @@ public class HeroMovement : MonoBehaviour
 
     public void OnMove(InputValue input) {
         Vector2 inputVec = input.Get<Vector2>();
-        moveByX = inputVec.x * moveSpeed;
+        xCoordDelta = inputVec.x * moveSpeed;
     }
 
     private void OnDestroy() {
@@ -64,7 +64,7 @@ public class HeroMovement : MonoBehaviour
     private void ConfigureAnimation() {
         animator.SetBool(GameConstants.GROUNDED_ANIMATION_CONDITION, isGrounded);
 
-        if(moveByX == 0) {
+        if(xCoordDelta == 0) {
             animator.SetBool(GameConstants.MOVE_HORIZONTALLY_ANIMATION_CONDITION, false);
         } else {
             animator.SetBool(GameConstants.MOVE_HORIZONTALLY_ANIMATION_CONDITION, true);
