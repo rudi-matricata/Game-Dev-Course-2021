@@ -6,15 +6,18 @@ public class HealthBar : MonoBehaviour {
 
     private const string heartTag = "Heart";
 
-    private readonly Stack<GameObject> hearts = new Stack<GameObject>();
+    public Stack<GameObject> Hearts { get; } = new Stack<GameObject>();
+
+    public HealthBar() {
+        HeroCollisions.OnEnemyHit += LoseHeart;
+    }
 
     private void Start() {
         foreach (Transform child in transform) {
             if (child.CompareTag(heartTag)) {
-                hearts.Push(child.gameObject);
+                Hearts.Push(child.gameObject);
             }
         }
-        HeroCollisions.OnEnemyHit += LoseHeart;
     }
 
     private void OnDestroy() {
@@ -22,8 +25,8 @@ public class HealthBar : MonoBehaviour {
     }
 
     private void LoseHeart() {
-        if (hearts.Count > 0) {
-            Destroy(hearts.Pop());
+        if (Hearts.Count > 0) {
+            Destroy(Hearts.Pop());
         } else {
             Debug.Log("No more hearts");
         }

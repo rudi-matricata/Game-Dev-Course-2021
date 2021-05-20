@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroCollisions : MonoBehaviour {
+
     public delegate void GroundHit(bool grounded);
     public static event GroundHit OnGroundHit;
 
@@ -50,15 +51,23 @@ public class HeroCollisions : MonoBehaviour {
             }
         }
         if (collisionObject.CompareTag(keyTag)) {
-            OnKeyObtained?.Invoke();
-            Destroy(collision.gameObject);
+            OnKey(collision);
         }
         if (collisionObject.CompareTag(enemyTag)) {
-            OnEnemyHit?.Invoke();
+            OnEnemy();
         }
         if (collision.gameObject.CompareTag(platformTag)) {
             SetGrounded(collision, true);
         }
+    }
+
+    private void OnKey(Collision2D collision) {
+        OnKeyObtained?.Invoke();
+        Destroy(collision.gameObject);
+    }
+
+    public void OnEnemy() {
+        OnEnemyHit?.Invoke();
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
