@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour {
 
     void Start() {
         rigidBody.velocity = transform.right * bulletSpeed;
+        StartCoroutine(BulletCleanup(10));
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -19,5 +20,10 @@ public class Bullet : MonoBehaviour {
             enemy.GetHit();
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator BulletCleanup(float time) {
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
     }
 }
