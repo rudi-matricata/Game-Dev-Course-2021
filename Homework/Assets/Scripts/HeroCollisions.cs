@@ -23,7 +23,7 @@ public class HeroCollisions : MonoBehaviour {
     private Rigidbody2D rigidBody;
 
     private void Start() {
-        trampolineForceFactor = 11;
+        trampolineForceFactor = 7;
 
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;
