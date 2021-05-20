@@ -12,6 +12,8 @@ public class WorldGenerator : MonoBehaviour
     private GameObject platformWithKeyPrefab;
     [SerializeField]
     private GameObject platformWithTrampolinePrefab;
+    [SerializeField]
+    private GameObject platformWithEnemy;
 
     public List<GameObject> prefabs = new List<GameObject>();
 
@@ -23,6 +25,8 @@ public class WorldGenerator : MonoBehaviour
         prefabs.Add(movingPlatformPrefab);
         prefabs.Add(platformWithKeyPrefab);
         prefabs.Add(platformWithTrampolinePrefab);
+        prefabs.Add(platformWithEnemy);
+
         StartCoroutine(DoGeneration());
     }
 
@@ -43,9 +47,9 @@ public class WorldGenerator : MonoBehaviour
     IEnumerator DoGeneration() {
         while(true) {
             if(generate) {
-                float xC = Random.Range(transform.position.x - 6, transform.position.x + 6);
-                float yC = Random.Range(transform.position.y + 2 , transform.position.y + 3.5f);
-                Vector2 spawnPosition = new Vector3(xC, yC, 0);
+                float randomX = Random.Range(transform.position.x - 6, transform.position.x + 6);
+                float randomY = Random.Range(transform.position.y + 2 , transform.position.y + 3);
+                Vector2 spawnPosition = new Vector3(randomX, randomY, 0);
                 Collider2D[] hitColliders = Physics2D.OverlapCircleAll(spawnPosition, 1f);
                 foreach (var hitCollider in hitColliders) {
                     if (!hitCollider.gameObject.CompareTag(GameConstants.PLAYER_TAG)) {
@@ -53,6 +57,7 @@ public class WorldGenerator : MonoBehaviour
                     }
                 }
                 Instantiate(prefabs[Random.Range(0, prefabs.Count)], spawnPosition, Quaternion.identity);
+
 
                 afterInstantiation: { }
             }
