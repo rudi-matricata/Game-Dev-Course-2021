@@ -6,22 +6,22 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class Test
+    public class GameTests
     {
         [Test]
         public void TestSimplePasses()
         {
-            HealthBar hb = new HealthBar();
-            HeroCollisions hc = new HeroCollisions();
+            HealthBar healthBar = new HealthBar();
+            HeroCollisions heroCollisions = new HeroCollisions();
 
             int i = 0;
             for(; i < 5; i++) {
-                hb.Hearts.Push(null);
+                healthBar.Hearts.Push(null);
             }
 
             while(i > 0) {
-                Assert.AreEqual(i--, hb.Hearts.Count);
-                hc.OnEnemy();
+                Assert.AreEqual(i--, healthBar.Hearts.Count);
+                heroCollisions.OnEnemy();
             }
         }
 
