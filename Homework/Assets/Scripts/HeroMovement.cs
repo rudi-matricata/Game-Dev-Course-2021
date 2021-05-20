@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class HeroMovement : MonoBehaviour
 {
-    private const string groundedAnimCondition = "isGrounded";
-    private const string xCoordAlteredAnimCondition = "isXMoving";
-    private const string hurtConditionTrigger = "hurt";
 
     [SerializeField]
     private int forceFactor;
@@ -65,17 +62,17 @@ public class HeroMovement : MonoBehaviour
     }
 
     private void ConfigureAnimation() {
-        animator.SetBool(groundedAnimCondition, isGrounded);
+        animator.SetBool(GameConstants.GROUNDED_ANIMATION_CONDITION, isGrounded);
 
         if(moveByX == 0) {
-            animator.SetBool(xCoordAlteredAnimCondition, false);
+            animator.SetBool(GameConstants.MOVE_HORIZONTALLY_ANIMATION_CONDITION, false);
         } else {
-            animator.SetBool(xCoordAlteredAnimCondition, true);
+            animator.SetBool(GameConstants.MOVE_HORIZONTALLY_ANIMATION_CONDITION, true);
         }
     }
 
     private void ShowHurt() {
-        animator.SetTrigger(hurtConditionTrigger);
+        animator.SetTrigger(GameConstants.HURT_ANIMATION_CONDITION_TRIGGER);
     }
 
     private void SetGrounded(bool grounded) {

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour {
 
-    private const string heartTag = "Heart";
-
     public Stack<GameObject> Hearts { get; } = new Stack<GameObject>();
 
     public HealthBar() {
@@ -14,7 +12,7 @@ public class HealthBar : MonoBehaviour {
 
     private void Start() {
         foreach (Transform child in transform) {
-            if (child.CompareTag(heartTag)) {
+            if (child.CompareTag(GameConstants.HEART_TAG)) {
                 Hearts.Push(child.gameObject);
             }
         }

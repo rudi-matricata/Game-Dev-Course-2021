@@ -13,11 +13,6 @@ public class HeroCollisions : MonoBehaviour {
     public delegate void ObtainKey();
     public static event ObtainKey OnKeyObtained;
 
-    private const string platformTag = "Platform";
-    private const string trampolineTag = "Trampoline";
-    private const string keyTag = "Key";
-    private const string enemyTag = "Enemy";
-
     [SerializeField]
     private int trampolineForceFactor;
 
@@ -31,32 +26,32 @@ public class HeroCollisions : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag(platformTag)) {
+        if (collision.gameObject.CompareTag(GameConstants.PLATFORM_TAG)) {
             transform.parent = collision.gameObject.transform;
         }
     }
     private void OnTriggerExit2D(Collider2D col) {
-        if (col.gameObject.CompareTag(platformTag)) {
+        if (col.gameObject.CompareTag(GameConstants.PLATFORM_TAG)) {
             transform.parent = null;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject collisionObject = collision.gameObject;
-        if (collisionObject.CompareTag(trampolineTag)) {
+        if (collisionObject.CompareTag(GameConstants.TRAMPOLINE_TAG)) {
             foreach (ContactPoint2D hitPos in collision.contacts) {
                 if (hitPos.normal.y > 0) {
                     rigidBody.AddForce(Vector2.up * trampolineForceFactor, ForceMode2D.Impulse);
                 }
             }
         }
-        if (collisionObject.CompareTag(keyTag)) {
+        if (collisionObject.CompareTag(GameConstants.KEY_TAG)) {
             OnKey(collision);
         }
-        if (collisionObject.CompareTag(enemyTag)) {
+        if (collisionObject.CompareTag(GameConstants.ENEMY_TAG)) {
             OnEnemy();
         }
-        if (collision.gameObject.CompareTag(platformTag)) {
+        if (collision.gameObject.CompareTag(GameConstants.PLATFORM_TAG)) {
             SetGrounded(collision, true);
         }
     }
@@ -71,7 +66,7 @@ public class HeroCollisions : MonoBehaviour {
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag(platformTag)) {
+        if (collision.gameObject.CompareTag(GameConstants.PLATFORM_TAG)) {
             foreach (ContactPoint2D hitPos in collision.contacts) {
                 if (hitPos.normal.x != 0) {
                     SetGrounded(collision, false);
@@ -85,14 +80,14 @@ public class HeroCollisions : MonoBehaviour {
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag(platformTag)) {
+        if (collision.gameObject.CompareTag(GameConstants.PLATFORM_TAG)) {
             SetGrounded(collision, false);
         }
     }
 
     private void SetGrounded(Collision2D collision, bool grounded) {
         GameObject collisionObject = collision.gameObject;
-        if (collisionObject.CompareTag(platformTag) || collisionObject.CompareTag(trampolineTag)) {
+        if (collisionObject.CompareTag(GameConstants.PLATFORM_TAG) || collisionObject.CompareTag(GameConstants.TRAMPOLINE_TAG)) {
             OnGroundHit?.Invoke(grounded);
         }
     }

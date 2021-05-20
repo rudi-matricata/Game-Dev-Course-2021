@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour, IHorizontallyMovable {
     {
         initialX = transform.position.x;
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag(GameConstants.PLAYER_TAG);
 
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.freezeRotation = true;

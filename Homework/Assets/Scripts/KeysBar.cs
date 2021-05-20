@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class KeysBar : MonoBehaviour {
 
-    private const string heroKeyTag = "HeroKey";
-    private const string fullKeySpriteName = "HudKeyFull";
-
     private int obtainedKeysCount;
 
     private RawImage[] keys = new RawImage[3];
@@ -15,13 +12,13 @@ public class KeysBar : MonoBehaviour {
 
     private void Start() {
         obtainedKeysCount = 0;
-        fullKeySprite = Resources.Load<Texture2D>(fullKeySpriteName);
+        fullKeySprite = Resources.Load<Texture2D>(GameConstants.FULL_KEY_SPRITE_NAME);
 
         HeroCollisions.OnKeyObtained += IncreaseObtainedKeys;
 
         int i = 0;
         foreach (Transform child in transform) {
-            if (child.CompareTag(heroKeyTag)) {
+            if (child.CompareTag(GameConstants.HERO_KEY_TAG)) {
                 keys[i++] = child.GetComponent<RawImage>();
             }
         }
