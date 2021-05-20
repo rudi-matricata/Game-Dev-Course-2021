@@ -43,9 +43,18 @@ public class WorldGenerator : MonoBehaviour
     IEnumerator DoGeneration() {
         while(true) {
             if(generate) {
-                float xC = Random.Range(transform.position.x - 7, transform.position.x + 7);
+                float xC = Random.Range(transform.position.x - 6, transform.position.x + 6);
                 float yC = Random.Range(transform.position.y + 2 , transform.position.y + 3.5f);
-                Instantiate(prefabs[Random.Range(0, prefabs.Count)], new Vector3(xC, yC, 0), Quaternion.identity);
+                Vector2 spawnPosition = new Vector3(xC, yC, 0);
+                Collider2D[] hitColliders = Physics2D.OverlapCircleAll(spawnPosition, 1f);
+                foreach (var hitCollider in hitColliders) {
+                    if (!hitCollider.gameObject.CompareTag(GameConstants.PLAYER_TAG)) {
+                       goto afterInstantiation; 
+                    }
+                }
+                Instantiate(prefabs[Random.Range(0, prefabs.Count)], spawnPosition, Quaternion.identity);
+
+                afterInstantiation: { }
             }
 
             yield return new WaitForSeconds(2);
